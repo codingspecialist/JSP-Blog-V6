@@ -3,16 +3,16 @@
 ```sql
 create table users(
   id number primary key,
-  username varchar(100) not null,
-  password varchar(100) not null,
-  email varchar(100) not null,
-  address varchar(200),
+  username varchar2(100) not null,
+  password varchar2(100) not null,
+  email varchar2(100) not null,
+  address varchar2(200),
   created date
 );
 
 create table boards(
   id number primary key,
-  title varchar(100) not null,
+  title varchar2(100) not null,
   content clob,
   userId number,
   created date
