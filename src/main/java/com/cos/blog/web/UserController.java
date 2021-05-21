@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cos.blog.service.Action;
-import com.cos.blog.service.user.Factory;
 import com.cos.blog.service.user.JoinAction;
 import com.cos.blog.service.user.JoinFormAction;
 

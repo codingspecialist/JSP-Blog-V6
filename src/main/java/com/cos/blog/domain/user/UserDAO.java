@@ -19,12 +19,12 @@ public class UserDAO {
 	}
 	
 	// post
-	public int save(User board) {
+	public int save(User user) {
 		return -1;
 	}
 	
 	// post
-	public int update(User board) {
+	public int update(User user) {
 		return -1;
 	}
 	

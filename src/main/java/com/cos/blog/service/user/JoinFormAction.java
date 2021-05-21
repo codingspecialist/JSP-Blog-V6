@@ -12,6 +12,6 @@ public class JoinFormAction implements Action{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		response.sendRedirect("views/user/joinForm.jsp");
 	}
 }

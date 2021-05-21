@@ -9,7 +9,7 @@
 		<div class="form-group">
 			<input type="password" class="form-control" placeholder="Enter password" name="password" required="required"/>
 		</div>
-		<div class="form-group">
+		<div class="form-group"> 
 			<input type="email" class="form-control" placeholder="Enter email" name="email" required="required"/>
 		</div>
 		<div class="form-group">
