@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cos.blog.service.Action;
+import com.cos.blog.service.user.Factory;
 import com.cos.blog.service.user.JoinAction;
 import com.cos.blog.service.user.JoinFormAction;
 
@@ -41,6 +42,7 @@ public class UserController extends HttpServlet {
 		}
 	}
 
+	// router에게 객체 생성을 위임하고 결과를 응답받음. (팩토리 패턴)
 	private Action router(String cmd){
 		if (cmd.equals("joinForm")) {
 			return new JoinFormAction();
@@ -59,5 +61,4 @@ public class UserController extends HttpServlet {
 		}
 		return null;
 	}
-	
 }
