@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.cos.blog.service.Action;
 import com.cos.blog.service.user.JoinAction;
 import com.cos.blog.service.user.JoinFormAction;
+import com.cos.blog.service.user.LoginAction;
+import com.cos.blog.service.user.LoginFormAction;
 
 // http://localhost:8000/blog/user
 @WebServlet("/user")
@@ -48,9 +50,9 @@ public class UserController extends HttpServlet {
 		} else if (cmd.equals("join")) {
 			return new JoinAction();
 		} else if (cmd.equals("loginForm")) {
-			
+			return new LoginFormAction();
 		} else if (cmd.equals("login")) {
-
+			return new LoginAction();
 		} else if (cmd.equals("updateForm")) {
 
 		} else if (cmd.equals("update")) {
