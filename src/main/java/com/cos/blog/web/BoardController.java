@@ -23,6 +23,7 @@ public class BoardController extends HttpServlet {
 	}
 
 	public void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// 1. null과 공백 접근 금지 (유효성 검사)
 		if(request.getParameter("cmd") == null || request.getParameter("cmd").equals("")) {
 			return;
