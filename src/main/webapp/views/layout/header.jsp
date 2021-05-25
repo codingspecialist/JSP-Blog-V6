@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	String cp = request.getContextPath(); // => /blog
-	pageContext.setAttribute("cp", cp);
+String cp = request.getContextPath(); // => /blog
+pageContext.setAttribute("cp", cp);
 %>
 <!DOCTYPE html>
 <html>
@@ -24,11 +23,24 @@
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>
+
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="${cp}/user?cmd=joinForm">회원가입</a></li>
-				<li class="nav-item"><a class="nav-link" href="${cp}/user?cmd=loginForm">로그인</a></li>
+			
+				<c:choose>
+					<c:when test="${empty principal}">
+						<li class="nav-item"><a class="nav-link" href="${cp}/user?cmd=joinForm">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link" href="${cp}/user?cmd=loginForm">로그인</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item"><a class="nav-link" href="${cp}/board?cmd=saveForm">글쓰기</a></li>
+						<li class="nav-item"><a class="nav-link" href="${cp}/user?cmd=updateForm">회원정보변경</a></li>
+						<li class="nav-item"><a class="nav-link" href="${cp}/user?cmd=logout">로그아웃</a></li>
+					</c:otherwise>
+				</c:choose>
+
 			</ul>
 		</div>
+
 	</nav>
 	<br>

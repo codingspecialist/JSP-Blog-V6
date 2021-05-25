@@ -13,6 +13,7 @@ import com.cos.blog.service.user.JoinAction;
 import com.cos.blog.service.user.JoinFormAction;
 import com.cos.blog.service.user.LoginAction;
 import com.cos.blog.service.user.LoginFormAction;
+import com.cos.blog.service.user.LogoutAction;
 
 // http://localhost:8000/blog/user
 @WebServlet("/user")
@@ -58,7 +59,7 @@ public class UserController extends HttpServlet {
 		} else if (cmd.equals("update")) {
 
 		} else if (cmd.equals("logout")) {
-
+			return new LogoutAction();
 		}
 		return null;
 	}
