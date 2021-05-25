@@ -10,6 +10,12 @@ import com.cos.blog.domain.CrudDAO;
 
 public class UserDAO implements CrudDAO<User>{
 	
+	private static UserDAO instance = new UserDAO();
+	private UserDAO() {}
+	public static UserDAO getInstance() {
+		return instance;
+	}
+	
 	// 로그인 함수
 	public User findByUsernameAndPassword(String username, String password) {
 		User user = new User();

@@ -29,11 +29,16 @@ public class LoginAction implements Action{
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		UserDAO userDAO = new UserDAO();
+		
+		UserDAO userDAO = UserDAO.getInstance();
 		// entity는 데이터베이스와 동기화된 User 오브젝트
 		User userEntity = userDAO.findByUsernameAndPassword(username, password);
 
 		if(userEntity != null) {
+			// 체크가 되었고, 로그인이 완료되었고 => response의 header에 Cookie를 저장해서 날리세요.
+			// 브라우저는 rememberMe = ssar 을 가지고 있으면 된다.
+
+			
 			HttpSession session = request.getSession();
 			// ${principal}
 			session.setAttribute("principal", userEntity);

@@ -3,11 +3,18 @@ package com.cos.blog.domain.board;
 import java.util.List;
 
 import com.cos.blog.domain.CrudDAO;
+import com.cos.blog.domain.user.UserDAO;
 import com.cos.blog.web.dto.BoardDetailDTO;
 
 
 public class BoardDAO implements CrudDAO<Board>{
 
+	private static BoardDAO instance = new BoardDAO();
+	private BoardDAO() {}
+	public static BoardDAO getInstance() {
+		return instance;
+	}
+	
 	// 상세보기시 Board정보와 User정보를 조인해서 가져올 함수
 	public BoardDetailDTO mDetail(int id) {
 		return null;
