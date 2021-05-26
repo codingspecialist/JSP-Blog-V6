@@ -14,6 +14,10 @@ pageContext.setAttribute("cp", cp);
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 <link href="${cp}/static/css/style.css" rel="stylesheet" />
 </head>
 <body>
@@ -26,7 +30,7 @@ pageContext.setAttribute("cp", cp);
 
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
-			
+
 				<c:choose>
 					<c:when test="${empty principal}">
 						<li class="nav-item"><a class="nav-link" href="${cp}/user?cmd=joinForm">회원가입</a></li>

@@ -1,9 +1,11 @@
 package com.cos.blog.domain.board;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
+import com.cos.blog.config.DBConn;
 import com.cos.blog.domain.CrudDAO;
-import com.cos.blog.domain.user.UserDAO;
 import com.cos.blog.web.dto.BoardDetailDTO;
 
 
@@ -34,8 +36,23 @@ public class BoardDAO implements CrudDAO<Board>{
 
 	@Override
 	public int save(Board data) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "INSERT INTO boards(id, title, content, userId, created) VALUES(boards_seq.nextval, ?, ?, ?, sysdate)";
+
+		try {
+			Connection conn = DBConn.디비연결();
+			// 1. PreparedStatement는 ?로 변수 바인딩이 가능
+			// 2. PreparedStatement는 인젝션 공격을 방어해준다.
+			PreparedStatement pstmt = conn.prepareStatement(sql); // 프로토콜이 적용된 버퍼
+			pstmt.setString(1, data.getTitle());
+			pstmt.setString(2, data.getContent());
+			pstmt.setInt(3, data.getUserId());
+
+			return pstmt.executeUpdate(); // 변경된 행의 개수
+			// pstmt.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 	@Override
