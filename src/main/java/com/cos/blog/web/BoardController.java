@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cos.blog.service.Action;
+import com.cos.blog.service.board.DetailAction;
+import com.cos.blog.service.board.ListAction;
 import com.cos.blog.service.board.SaveAction;
 import com.cos.blog.service.board.SaveFormAction;
 
@@ -43,9 +45,9 @@ public class BoardController extends HttpServlet {
 		// http://localhost:8080/blog/board?cmd=list
 		// http://localhost:8080/blog => index.jsp
 		if(cmd.equals("list")) {
-			
+			return new ListAction();
 		}else if(cmd.equals("detail")) {
-			
+			return new DetailAction();
 		}else if(cmd.equals("delete")) {
 			
 		}else if(cmd.equals("updateForm")) {

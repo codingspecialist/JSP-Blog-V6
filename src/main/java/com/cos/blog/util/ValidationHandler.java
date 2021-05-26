@@ -19,7 +19,8 @@ public class ValidationHandler {
 		while (e.hasMoreElements()) {
 			String key = e.nextElement();
 			System.out.println("key : "+key);
-			if (request.getParameter(key).equals("")) {
+			String value = request.getParameter(key);
+			if (value.equals("") && !value.equals("files")) {
 				System.out.println(key + "값이 공백입니다");
 				return -1;
 			}

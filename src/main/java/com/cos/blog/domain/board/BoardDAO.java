@@ -2,35 +2,87 @@ package com.cos.blog.domain.board;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.cos.blog.config.DBConn;
 import com.cos.blog.domain.CrudDAO;
 import com.cos.blog.web.dto.BoardDetailDTO;
 
-
-public class BoardDAO implements CrudDAO<Board>{
+public class BoardDAO implements CrudDAO<Board> {
 
 	private static BoardDAO instance = new BoardDAO();
-	private BoardDAO() {}
+
+	private BoardDAO() {
+	}
+
 	public static BoardDAO getInstance() {
 		return instance;
 	}
-	
+
 	// 상세보기시 Board정보와 User정보를 조인해서 가져올 함수
 	public BoardDetailDTO mDetail(int id) {
+		// Board : id, title, content, created, userId
+		// User : username
+		BoardDetailDTO boardDetailDTO = new BoardDetailDTO();
+		String sql = "SELECT b.id, b.title, b.content, u.username, u.id, b.created FROM boards b INNER JOIN users u ON b.userId= u.id WHERE b.id = ?";
+
+		try {
+			Connection conn = DBConn.디비연결();
+
+			PreparedStatement pstmt = conn.prepareStatement(sql); // 프로토콜이 적용된 버퍼
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				boardDetailDTO.setId(rs.getInt(1));
+				boardDetailDTO.setTitle(rs.getString(2));
+				boardDetailDTO.setContent(rs.getString(3));
+				boardDetailDTO.setUsername(rs.getString(4));
+				boardDetailDTO.setUserId(rs.getInt(5));
+				boardDetailDTO.setCreated(rs.getTimestamp(6));
+			}
+			System.out.println("========================");
+			System.out.println(boardDetailDTO);
+			System.out.println("========================");
+			return boardDetailDTO;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public Board findById(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Board> findAll() {
-		// TODO Auto-generated method stub
+		List<Board> boards = new ArrayList<>();
+		String sql = "SELECT * FROM boards ORDER BY id DESC"; // 5, 4, 3, 2, 1
+
+		try {
+			Connection conn = DBConn.디비연결();
+
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Board board = new Board();
+				board.setId(rs.getInt("id"));
+				board.setTitle(rs.getString("title"));
+				board.setContent(rs.getString("content"));
+				board.setUserId(rs.getInt("userId"));
+				board.setCreated(rs.getTimestamp("created"));
+
+				boards.add(board);
+			}
+			return boards;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -66,9 +118,5 @@ public class BoardDAO implements CrudDAO<Board>{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
+
 }
-
-
-
