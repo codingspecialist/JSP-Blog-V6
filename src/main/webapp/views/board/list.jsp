@@ -15,6 +15,20 @@
 		<!-- 게시글 아이템 종료 -->
 	</c:forEach>
 
+	
+	<ul class="pagination">
+		<c:choose>
+			<c:when test="${param.page == 0}">
+				<li class="page-item disabled"><a class="page-link" href="${cp}/board?cmd=list&page=${param.page - 1}">Previous</a></li>
+			</c:when>
+			<c:otherwise>
+				<li class="page-item"><a class="page-link" href="${cp}/board?cmd=list&page=${param.page - 1}">Previous</a></li>
+			</c:otherwise>
+		</c:choose>
+		
+		<li class="page-item"><a class="page-link" href="${cp}/board?cmd=list&page=${param.page + 1}"">Next</a></li>
+	</ul>
+
 </div>
 
 <%@ include file="../layout/footer.jsp"%>

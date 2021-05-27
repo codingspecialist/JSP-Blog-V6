@@ -43,9 +43,9 @@ public class BoardDAO implements CrudDAO<Board> {
 				boardDetailDTO.setUserId(rs.getInt(5));
 				boardDetailDTO.setCreated(rs.getTimestamp(6));
 			}
-			System.out.println("========================");
-			System.out.println(boardDetailDTO);
-			System.out.println("========================");
+//			System.out.println("========================");
+//			System.out.println(boardDetailDTO);
+//			System.out.println("========================");
 			return boardDetailDTO;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,6 +55,40 @@ public class BoardDAO implements CrudDAO<Board> {
 
 	@Override
 	public Board findById(int id) {
+		return null;
+	}
+	
+	public List<Board> findAll(int page) {
+		List<Board> boards = new ArrayList<>();
+		StringBuffer sb = new StringBuffer();
+		sb.append("select * from ");
+		sb.append("(");
+		sb.append("select id, title, content, userId, created, rownum as num from boards order by id desc");
+		sb.append(")");
+		sb.append("where num > ? and num <= ?");
+
+		try {
+			Connection conn = DBConn.디비연결();
+
+			PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, page*3);
+			pstmt.setInt(2, (page+1)*3);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Board board = new Board();
+				board.setId(rs.getInt("id"));
+				board.setTitle(rs.getString("title"));
+				board.setContent(rs.getString("content"));
+				board.setUserId(rs.getInt("userId"));
+				board.setCreated(rs.getTimestamp("created"));
+
+				boards.add(board);
+			}
+			return boards;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

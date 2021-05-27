@@ -18,8 +18,10 @@ public class ListAction implements Action{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int page = Integer.parseInt(request.getParameter("page"));
+		
 		BoardDAO boardDAO = BoardDAO.getInstance();
-		List<Board> boardsEntity = boardDAO.findAll();
+		List<Board> boardsEntity = boardDAO.findAll(page);
 		
 //		System.out.println("=============================");
 //		System.out.println(boardsEntity.size());

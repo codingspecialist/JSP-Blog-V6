@@ -18,7 +18,7 @@ public class UserDAO implements CrudDAO<User>{
 	
 	// 로그인 함수
 	public User findByUsernameAndPassword(String username, String password) {
-		User user = new User();
+		User user = new User(); // user null  일 수가 없음.
 		String sql = "SELECT id, username, email, address, created FROM users WHERE username = ? AND password = ?";
 
 		try {
@@ -35,7 +35,7 @@ public class UserDAO implements CrudDAO<User>{
 				user.setUsername(rs.getString("username"));
 				user.setEmail(rs.getString("email"));
 				user.setAddress(rs.getString("address"));
-				user.setCreated(rs.getTimestamp("created"));
+				user.setCreated(rs.getTimestamp("created"));		
 				return user;
 			}
 			
