@@ -36,8 +36,9 @@ public class UserDAO implements CrudDAO<User>{
 				user.setEmail(rs.getString("email"));
 				user.setAddress(rs.getString("address"));
 				user.setCreated(rs.getTimestamp("created"));
+				return user;
 			}
-			return user;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
