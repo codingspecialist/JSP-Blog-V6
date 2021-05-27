@@ -149,8 +149,21 @@ public class BoardDAO implements CrudDAO<Board> {
 
 	@Override
 	public int deleteById(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "DELETE FROM boards WHERE id = ?";
+
+		try {
+			Connection conn = DBConn.디비연결();
+			// 1. PreparedStatement는 ?로 변수 바인딩이 가능
+			// 2. PreparedStatement는 인젝션 공격을 방어해준다.
+			PreparedStatement pstmt = conn.prepareStatement(sql); // 프로토콜이 적용된 버퍼
+			pstmt.setInt(1, id);
+
+			return pstmt.executeUpdate(); // 변경된 행의 개수
+			// pstmt.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 }

@@ -13,7 +13,7 @@ import com.cos.blog.domain.user.User;
 import com.cos.blog.service.Action;
 import com.cos.blog.util.Script;
 
-public class SaveAction implements Action{
+public class DeleteAction implements Action{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,31 +25,15 @@ public class SaveAction implements Action{
 			Script.href("로그인을 먼저 진행해주세요", response);
 			return;
 		}
-		
-//		ValidationHandler vh = new ValidationHandler();
-//		List<String> keys = Arrays.asList("title", "content");
-//		if(vh.validation(keys, request, response) != 1) {
-//			return;
-//		}
-		// 공통 로직 끝
-		
-		// 핵심 로직
-		// 글을 DB INSERT 하기
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		Board board = new Board();
-		board.setTitle(title);
-		board.setContent(content);
-		board.setUserId(principal.getId());
-		
+
+		int id = Integer.parseInt(request.getParameter("id"));
 		BoardDAO boardDAO = BoardDAO.getInstance();
-		int result = boardDAO.save(board);
+		int result = boardDAO.deleteById(id);
 		
 		if(result == 1) {
 			response.sendRedirect("/blog");
 		}else {
-			Script.back("글쓰기 실패", response);
+			Script.back("글삭제 실패", response);
 		}
-		
 	}
 }

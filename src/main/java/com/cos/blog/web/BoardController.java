@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cos.blog.service.Action;
+import com.cos.blog.service.board.DeleteAction;
 import com.cos.blog.service.board.DetailAction;
 import com.cos.blog.service.board.ListAction;
 import com.cos.blog.service.board.SaveAction;
@@ -49,7 +50,7 @@ public class BoardController extends HttpServlet {
 		}else if(cmd.equals("detail")) {
 			return new DetailAction();
 		}else if(cmd.equals("delete")) {
-			
+			return new DeleteAction();
 		}else if(cmd.equals("updateForm")) {
 			
 		}else if(cmd.equals("update")) {

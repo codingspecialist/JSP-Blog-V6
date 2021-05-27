@@ -3,9 +3,15 @@
 <%@ include file="../layout/header.jsp"%>
 
 <div class="container">
-	<a href="#" class="btn btn-warning">수정</a>
-	<button id="btn-delete" class="btn btn-danger">삭제</button>
-	<br /> <br />
+	<c:if test="${principal.id == dto.userId}">
+		<a href="#" class="btn btn-warning">수정</a>
+		<form action="${cp}/board?cmd=delete" method="post">
+			<input type="hidden" name="id" value="${dto.id}" />
+			<button id="btn-delete" class="btn btn-danger" type="submit">삭제</button>
+		</form>
+		
+	</c:if>
+	<br /><br />
 	<div>
 		글 번호 : ${dto.id}</span> 작성자 : <span><i>${dto.username} </i></span>
 	</div>
